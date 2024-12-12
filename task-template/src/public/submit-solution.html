@@ -1,0 +1,47 @@
+<!-- src/public/submit-solution.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Solution</title>
+  <style>
+    /* Add your CSS here */
+  </style>
+</head>
+<body>
+  <h2>Submit Solution</h2>
+  <form id="submit-solution-form">
+    <label for="roundNumber">Round Number:</label>
+    <input type="number" id="roundNumber" required>
+    <label for="solutionText">Solution Text:</label>
+    <textarea id="solutionText" required></textarea>
+    <button type="submit">Submit Solution</button>
+  </form>
+
+  <div id="status-message"></div>
+
+  <script>
+    document.getElementById('submit-solution-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const roundNumber = document.getElementById('roundNumber').value;
+      const solutionText = document.getElementById('solutionText').value;
+      
+      document.getElementById('status-message').textContent = 'Submitting solution...';
+      
+      try {
+        const response = await fetch('/api/submit-solution', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ roundNumber, solutionText })
+        });
+        const result = await response.json();
+        document.getElementById('status-message').textContent = result.message;
+      } catch (error) {
+        document.getElementById('status-message').textContent = 'Error submitting solution: ' + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
