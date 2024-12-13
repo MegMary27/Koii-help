@@ -11,7 +11,7 @@ import { audit } from "./task/3-audit.js";
 import { distribution } from "./task/4-distribution.js";
 
 // custom REST API routes
-import { routes } from "./task/5-routes.js";
+import { routes } from './task/5-routes.js';
 
 initializeTaskManager({
   setup,
