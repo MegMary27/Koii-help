@@ -39,4 +39,4 @@ router.get("/audit-solution", async (req, res) => {
 });
 
 // Export router as routes so it can be used in other files
-export default router;
+export const routes = router;
